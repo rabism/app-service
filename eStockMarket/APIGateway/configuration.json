@@ -1,0 +1,149 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/info/{companycode}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          //"Host": "company-service",
+          //"Port": 80
+          "Host": "localhost",
+          "Port": 51197
+        }
+      ],
+      "UpstreamPathTemplate": "/info/{companycode}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/getall",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          //"Host": "company-service",
+          //"Port": 80
+          "Host": "localhost",
+          "Port": 51197
+        }
+      ],
+      "UpstreamPathTemplate": "/getall",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/register",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          //"Host": "company-service",
+          //"Port": 80
+          "Host": "localhost",
+          "Port": 51197
+        }
+      ],
+      "UpstreamPathTemplate": "/register",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "basic",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/delete/{companycode}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          //"Host": "company-service",
+          //"Port": 80
+          "Host": "localhost",
+          "Port": 51197
+        }
+      ],
+      "UpstreamPathTemplate": "/delete/{companycode}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "basic",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/add/{companycode}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          //"Host": "stock-service",
+          //"Port": 80
+          "Host": "localhost",
+          "Port": 50478
+        }
+      ],
+      "UpstreamPathTemplate": "/add/{companycode}",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "basic",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/get/{companycode}/{startdate}/{enddate}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          //"Host": "stock-service",
+          //"Port": 80
+          "Host": "localhost",
+          "Port": 50478
+        }
+      ],
+      "UpstreamPathTemplate": "/get/{companycode}/{startdate}/{enddate}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/user/register",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          //"Host": "user-service",
+          //"Port": 80,
+          "Host": "localhost",
+          "Port": 51951
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/user/register",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/users/authenticate",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          //"Host": "user-service",
+          //"Port": 80
+          "Host": "localhost",
+          "Port": 51951
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/users/authenticate",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/users",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          //"Host": "user-service",
+          //"Port": 80
+          "Host": "localhost",
+          "Port": 51951
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/users",
+      "UpstreamHttpMethod": [ "Put" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "basic",
+        "AllowedScopes": []
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+
+  }
+}
