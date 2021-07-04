@@ -1,3 +1,4 @@
+using AutoWrapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -106,6 +107,7 @@ namespace Users.API
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "User API V1");
             });
+            app.UseApiResponseAndExceptionWrapper();
             app.UseHttpsRedirection();
 
             app.UseRouting();

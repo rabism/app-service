@@ -1,3 +1,4 @@
+using AutoWrapper;
 using Confluent.Kafka;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -97,7 +98,7 @@ namespace StocksAPI
             app.UseMetricServer();
             app.UseHttpMetrics();
             app.UseCors("CorsPolicy");
-
+            app.UseApiResponseAndExceptionWrapper();
             app.UseRouting();
 
 

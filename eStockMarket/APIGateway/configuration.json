@@ -97,7 +97,7 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/api/v1/user/register",
+      "DownstreamPathTemplate": "/api/v1/users/register",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {

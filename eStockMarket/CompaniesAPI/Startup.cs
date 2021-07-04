@@ -1,3 +1,4 @@
+using AutoWrapper;
 using CompaniesAPI.DBContexts;
 using CompaniesAPI.Repository;
 using CompaniesAPI.Services;
@@ -101,7 +102,7 @@ namespace CompaniesAPI
             app.UseMetricServer();
             app.UseHttpMetrics();
             app.UseCors("CorsPolicy");
-
+            app.UseApiResponseAndExceptionWrapper();
             app.UseRouting();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
