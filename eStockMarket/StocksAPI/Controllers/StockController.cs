@@ -65,6 +65,7 @@ JwtBearerDefaults.AuthenticationScheme)]
         {
             try
             {
+                _logger.LogInformation($"Getting stock of {companycode} for the time-period {startdate} - {enddate}");
                 var stocks = await _stockService.GetAsync(companycode, startdate, enddate);
                 return Ok(stocks);
             }

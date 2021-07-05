@@ -1,3 +1,4 @@
+using AutoWrapper;
 using CompaniesAPI.DBContexts;
 using CompaniesAPI.Repository;
 using CompaniesAPI.Services;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Prometheus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,8 +88,21 @@ namespace CompaniesAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Custom Metrics to count requests for each endpoint and the method
+            var counter = Metrics.CreateCounter("companyapi_path_counter", "Counts requests to the Company API endpoints", new CounterConfiguration
+            {
+                LabelNames = new[] { "method", "endpoint" }
+            });
+            app.Use((context, next) =>
+            {
+                counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
+                return next();
+            });
+            // Use the Prometheus middleware
+            app.UseMetricServer();
+            app.UseHttpMetrics();
             app.UseCors("CorsPolicy");
-
+            app.UseApiResponseAndExceptionWrapper();
             app.UseRouting();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
