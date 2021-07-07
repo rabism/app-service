@@ -32,5 +32,9 @@ namespace Users.API.Repository
             return context.Users.Find(email);
         }
 
+        public UserDetails GetUserByCredential(UserDetails user){
+            return context.Users.FirstOrDefault(u => u.Email == user.Email && u.Password==user.Password);
+         }
+
     }
 }

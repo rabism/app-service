@@ -30,7 +30,7 @@ namespace Users.API.Services
 
         public bool Login(UserDetails user)
         {
-            var _user = repository.GetUser(user);
+            var _user = repository.GetUserByCredential(user);
             if (_user != null)
                 return true;
             else

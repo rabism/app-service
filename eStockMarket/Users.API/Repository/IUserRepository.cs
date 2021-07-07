@@ -8,5 +8,6 @@ namespace Users.API.Repository
         void ChangePassword(UserDetails user);
         UserDetails GetUser(UserDetails user);
         UserDetails GetUserByMail(string email);
+        UserDetails GetUserByCredential(UserDetails user);
     }
 }

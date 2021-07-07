@@ -104,7 +104,7 @@
           //"Host": "user-service",
           //"Port": 80,
           "Host": "localhost",
-          "Port": 51951
+          "Port": 5001
         }
       ],
       "UpstreamPathTemplate": "/api/v1/user/register",
@@ -118,7 +118,7 @@
           //"Host": "user-service",
           //"Port": 80
           "Host": "localhost",
-          "Port": 51951
+          "Port": 5001
         }
       ],
       "UpstreamPathTemplate": "/api/v1/users/authenticate",
@@ -132,7 +132,7 @@
           //"Host": "user-service",
           //"Port": 80
           "Host": "localhost",
-          "Port": 51951
+          "Port": 5001
         }
       ],
       "UpstreamPathTemplate": "/api/v1/users",
