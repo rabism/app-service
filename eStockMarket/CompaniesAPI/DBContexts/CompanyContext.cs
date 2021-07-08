@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 namespace CompaniesAPI.DBContexts
 {
 
-    public class CompanyContext : DbContext
+    public class CompanyDBContext : DbContext
     {
-        public CompanyContext(DbContextOptions<CompanyContext> options) : base(options)
+        public CompanyDBContext(DbContextOptions<CompanyDBContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Stock> Stocks { get; set; }

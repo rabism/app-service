@@ -10,9 +10,9 @@ namespace CompaniesAPI.Repository
 {
     public class CompanyRepository : ICompanyRepository
     {
-        private readonly CompanyContext _dbContext;
+        private readonly CompanyDBContext _dbContext;
 
-        public CompanyRepository(CompanyContext dbContext)
+        public CompanyRepository(CompanyDBContext dbContext)
         {
             _dbContext = dbContext;
         }

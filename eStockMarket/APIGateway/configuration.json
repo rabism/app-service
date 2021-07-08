@@ -1,45 +1,45 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/info/{companycode}",
+      "DownstreamPathTemplate": "/api/company/{companycode}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           //"Host": "company-service",
           //"Port": 80
           "Host": "localhost",
-          "Port": 51197
+          "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/info/{companycode}",
+      "UpstreamPathTemplate": "/api/v1.0/market/company/info/{companycode}",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/getall",
+      "DownstreamPathTemplate": "/api/company",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           //"Host": "company-service",
           //"Port": 80
           "Host": "localhost",
-          "Port": 51197
+          "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/getall",
+      "UpstreamPathTemplate": "/api/v1.0/market/company/getall",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/register",
+      "DownstreamPathTemplate": "/api/company",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           //"Host": "company-service",
           //"Port": 80
           "Host": "localhost",
-          "Port": 51197
+          "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/register",
+      "UpstreamPathTemplate": "/api/v1.0/market/company/register",
       "UpstreamHttpMethod": [ "Post" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "basic",
@@ -47,17 +47,17 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/delete/{companycode}",
+      "DownstreamPathTemplate": "/api/company/{companycode}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           //"Host": "company-service",
           //"Port": 80
           "Host": "localhost",
-          "Port": 51197
+          "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/delete/{companycode}",
+      "UpstreamPathTemplate": "/api/v1.0/market/company/delete/{companycode}",
       "UpstreamHttpMethod": [ "Delete" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "basic",

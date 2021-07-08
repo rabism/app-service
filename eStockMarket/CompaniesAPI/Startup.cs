@@ -37,7 +37,22 @@ namespace CompaniesAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<CompanyContext>(o => o.UseSqlServer(Configuration.GetConnectionString("CompanyDB")));
+            string server = Environment.GetEnvironmentVariable("SQL_HOST");
+            string database = Environment.GetEnvironmentVariable("SQL_DB");
+            string userId = Environment.GetEnvironmentVariable("SQL_USER");
+            string password = Environment.GetEnvironmentVariable("SQL_PASSWORD");
+            string winAuth = Environment.GetEnvironmentVariable("SQL_INTEGRATED_SECURITY");
+
+            string connectionString = string.Empty;
+            if (winAuth == "Y")
+            {
+                connectionString = string.Format("server={0};database={1};Integrated security={2}", server, database, true);
+            }
+            else
+            {
+                connectionString = string.Format("server={0};database={1};User ID={2};Password={3};", server, database, userId, password);
+            }
+            services.AddDbContext<CompanyDBContext>(o => o.UseSqlServer(connectionString));
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);

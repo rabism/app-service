@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CompaniesAPI.Migrations
 {
-    [DbContext(typeof(CompanyContext))]
+    [DbContext(typeof(CompanyDBContext))]
     [Migration("20210627195703_DeleteCascade")]
     partial class DeleteCascade
     {

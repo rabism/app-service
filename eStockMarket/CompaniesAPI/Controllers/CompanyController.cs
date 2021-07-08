@@ -15,7 +15,7 @@ using System.Transactions;
 namespace CompaniesAPI.Controllers
 {
     [ApiController]
-    [Route("/api/v1.0/market/[controller]")]
+    [Route("api/[controller]")]
     public class CompanyController : ControllerBase
     {
         readonly ICompanyService service;
@@ -29,7 +29,6 @@ namespace CompaniesAPI.Controllers
         [Authorize(AuthenticationSchemes =
 JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
-        [Route("/register")]
         public IActionResult Post([FromBody] CompanyDTO company)
         {
             try
@@ -53,7 +52,7 @@ JwtBearerDefaults.AuthenticationScheme)]
         [Authorize(AuthenticationSchemes =
 JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete]
-        [Route("/delete/{companycode}")]
+        [Route("{companycode}")]
         public IActionResult Delete(string companycode)
         {
             try
@@ -74,7 +73,7 @@ JwtBearerDefaults.AuthenticationScheme)]
             }
         }
         [HttpGet]
-        [Route("/info/{companycode}")]
+        [Route("{companycode}")]
         public IActionResult Get(string companycode)
         {
             try
@@ -94,7 +93,6 @@ JwtBearerDefaults.AuthenticationScheme)]
             }
         }
         [HttpGet]
-        [Route("/getall")]
         public IActionResult Get()
         {
             try

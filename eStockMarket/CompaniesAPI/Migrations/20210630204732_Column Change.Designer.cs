@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CompaniesAPI.Migrations
 {
-    [DbContext(typeof(CompanyContext))]
+    [DbContext(typeof(CompanyDBContext))]
     [Migration("20210630204732_Column Change")]
     partial class ColumnChange
     {
