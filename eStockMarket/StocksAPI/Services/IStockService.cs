@@ -8,7 +8,7 @@ namespace StocksAPI.Services
 {
     public interface IStockService
     {
-        Task AddStockAsync(Stock stock);
+        Task<int> AddStockAsync(Stock stock);
         Task<IReadOnlyList<Stock>> GetAsync(string companyCode, DateTime startDate, DateTime endDate);
     }
 }

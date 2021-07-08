@@ -1,5 +1,6 @@
 using AutoWrapper;
 using Confluent.Kafka;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,6 +19,7 @@ using StocksAPI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,7 +43,7 @@ namespace StocksAPI
             services.AddScoped<IStockRepository, StockRepository>();
             services.AddScoped<IMessageProducerService, MessageProducerService>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
-            services.AddScoped<StockDbContext>();
+            services.AddScoped<IStockDbContext,StockDbContext>();
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -79,6 +81,7 @@ namespace StocksAPI
                 BootstrapServers = string.Format("{0}:{1}", kafkaHost, kafkaPort)
             };
             services.AddSingleton<ProducerConfig>(producerConfig);
+            services.AddMediatR(Assembly.GetExecutingAssembly());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

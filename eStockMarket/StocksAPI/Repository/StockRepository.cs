@@ -10,8 +10,8 @@ namespace StocksAPI.Repository
 {
     public class StockRepository : IStockRepository
     {
-        readonly StockDbContext context;
-        public StockRepository(StockDbContext dbContext)
+        readonly IStockDbContext context;
+        public StockRepository(IStockDbContext dbContext)
         {
             context = dbContext;
         }

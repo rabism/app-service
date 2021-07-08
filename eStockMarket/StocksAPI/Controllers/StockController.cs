@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿
+using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,6 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using StocksAPI.Features.StockFeatures.Commands;
+using StocksAPI.Features.StockFeatures.Queries;
 
 namespace StocksAPI.Controllers
 {
@@ -17,7 +22,8 @@ namespace StocksAPI.Controllers
     [Route("/api/v1.0/market/[controller]")]
     public class StockController : ControllerBase
     {
-
+        private IMediator _mediator;
+        protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
         private readonly ILogger<StockController> _logger;
         private readonly IStockService _stockService;
         readonly IMessageProducerService messageProducer;
@@ -37,7 +43,12 @@ JwtBearerDefaults.AuthenticationScheme)]
             {
                 Stock _stock = MapToStock(stock);
                 _stock.CompanyCode = companycode;
-                await _stockService.AddStockAsync(_stock);
+                AddStockCommand command = new AddStockCommand
+                {
+                    Stock = _stock
+                };
+                await Mediator.Send(command);
+                //await _stockService.AddStockAsync(_stock);
                 _logger.LogInformation($"Sending stock info to Kafka for {companycode}");
                 messageProducer.WriteMessage("StockInfo", _stock);
                 return CreatedAtAction(nameof(Post), companycode);
@@ -66,7 +77,13 @@ JwtBearerDefaults.AuthenticationScheme)]
             try
             {
                 _logger.LogInformation($"Getting stock of {companycode} for the time-period {startdate} - {enddate}");
-                var stocks = await _stockService.GetAsync(companycode, startdate, enddate);
+                var stocks = await Mediator.Send(new GetStockByCompanyCodeAndStartDateEndDateQuery()
+                {
+                    CompanyCode = companycode,
+                    StartDate = startdate,
+                    EndDate = enddate
+                });
+                //var stocks = await _stockService.GetAsync(companycode, startdate, enddate);
                 return Ok(stocks);
             }
             catch (StockNotFoundException pnf)

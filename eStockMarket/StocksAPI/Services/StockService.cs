@@ -16,7 +16,7 @@ namespace StocksAPI.Services
         {
             _stockRepository = stockRepository;
         }
-        public async Task AddStockAsync(Stock stock)
+        public async Task<int> AddStockAsync(Stock stock)
         {
             //if (!(await _stockRepository.IsCompanyExistsAsync(stock.CompanyCode)))
             //{
@@ -24,7 +24,8 @@ namespace StocksAPI.Services
             //}
             //else
             //{
-                await _stockRepository.AddStockAsync(stock);
+            await _stockRepository.AddStockAsync(stock);
+            return stock.StockId;
             //}
         }
 

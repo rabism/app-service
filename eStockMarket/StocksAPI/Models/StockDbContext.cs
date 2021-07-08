@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StocksAPI.Models
 {
-    public class StockDbContext
+    public class StockDbContext : IStockDbContext
     {
         private readonly IMongoDatabase _database = null;
         public StockDbContext()
