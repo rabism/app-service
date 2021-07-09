@@ -19,24 +19,28 @@ using StocksAPI.Features.StockFeatures.Queries;
 namespace StocksAPI.Controllers
 {
     [ApiController]
-    [Route("/api/v1.0/market/[controller]")]
+    [Route("api/[controller]")]
     public class StockController : ControllerBase
     {
         private IMediator _mediator;
-        protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+       // protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
         private readonly ILogger<StockController> _logger;
         private readonly IStockService _stockService;
         readonly IMessageProducerService messageProducer;
-        public StockController(ILogger<StockController> logger, IStockService stockService, IMessageProducerService producerService)
+        public StockController(ILogger<StockController> logger,
+         IStockService stockService, IMessageProducerService producerService,
+         IMediator mediator
+         )
         {
             _logger = logger;
             _stockService = stockService;
             messageProducer = producerService;
+            _mediator=mediator;
         }
         [Authorize(AuthenticationSchemes =
 JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
-        [Route("/add/{companycode}")]
+        [Route("{companycode}")]
         public async Task<IActionResult> Post([FromBody] StockDto stock,string companycode)
         {
             try
@@ -47,8 +51,7 @@ JwtBearerDefaults.AuthenticationScheme)]
                 {
                     Stock = _stock
                 };
-                await Mediator.Send(command);
-                //await _stockService.AddStockAsync(_stock);
+                await _mediator.Send(command);
                 _logger.LogInformation($"Sending stock info to Kafka for {companycode}");
                 messageProducer.WriteMessage("StockInfo", _stock);
                 return CreatedAtAction(nameof(Post), companycode);
@@ -71,13 +74,13 @@ JwtBearerDefaults.AuthenticationScheme)]
         }
 
         [HttpGet]
-        [Route("/get/{companycode}/{startdate}/{enddate}")]
+        [Route("{companycode}/{startdate}/{enddate}")]
         public async Task<IActionResult> Get(string companycode, DateTime startdate, DateTime enddate)
         {
             try
             {
                 _logger.LogInformation($"Getting stock of {companycode} for the time-period {startdate} - {enddate}");
-                var stocks = await Mediator.Send(new GetStockByCompanyCodeAndStartDateEndDateQuery()
+                var stocks = await _mediator.Send(new GetStockByCompanyCodeAndStartDateEndDateQuery()
                 {
                     CompanyCode = companycode,
                     StartDate = startdate,

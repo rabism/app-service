@@ -38,7 +38,7 @@ namespace StocksAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.Configure<Settings>(Configuration.GetSection("MongoConnection"));
+            //services.Configure<Settings>(Configuration.GetSection("MongoConnection"));
             services.AddScoped<IStockService, StockService>();
             services.AddScoped<IStockRepository, StockRepository>();
             services.AddScoped<IMessageProducerService, MessageProducerService>();

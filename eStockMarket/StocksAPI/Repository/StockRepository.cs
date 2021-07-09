@@ -17,11 +17,6 @@ namespace StocksAPI.Repository
         }
         public async Task AddStockAsync(Stock stock)
         {
-            int id = 101;
-            var stockList = await this.GetStockByCompanyCode(stock.CompanyCode);
-            if (stockList.Count > 0)
-                id = stockList.Max(d => d.StockId) + 1;
-            stock.StockId = id;
             await context.Stocks.InsertOneAsync(stock);
         }
 

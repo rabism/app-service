@@ -14,7 +14,10 @@ namespace StocksAPI.Features.StockFeatures.Queries
         public string CompanyCode { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public class GetStockByCompanyCodeAndStartDateEndDateQueryHandler : IRequestHandler<GetStockByCompanyCodeAndStartDateEndDateQuery, IReadOnlyList<Stock>>
+       
+    }
+
+     public class GetStockByCompanyCodeAndStartDateEndDateQueryHandler : IRequestHandler<GetStockByCompanyCodeAndStartDateEndDateQuery, IReadOnlyList<Stock>>
         {
             readonly IStockDbContext _context;
             public GetStockByCompanyCodeAndStartDateEndDateQueryHandler(IStockDbContext context)
@@ -26,5 +29,4 @@ namespace StocksAPI.Features.StockFeatures.Queries
                 return await _context.Stocks.FindAsync(x => x.CompanyCode.Equals(query.CompanyCode) && x.StockDateTime > query.StartDate && x.StockDateTime < query.EndDate).Result.ToListAsync();
             }
         }
-    }
 }

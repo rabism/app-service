@@ -15,9 +15,11 @@
       "launchUrl": "swagger/index.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "http://localhost:5004",
+        "ASPNETCORE_URLS": "http://localhost:5005",
         "KAFKA_HOST": "localhost",
-        "KAFKA_PORT": "9092"
+        "KAFKA_PORT": "9092",
+        "MONGO_CONNECTION_STRING":"mongodb://localhost:27017",
+        "MONGO_DATABASE_NAME":"StockDB"
       }
     },
     "StocksAPI": {
@@ -25,9 +27,14 @@
       "launchBrowser": true,
       "launchUrl": "swagger/index.html",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "KAFKA_HOST": "localhost",
+        "KAFKA_PORT": "9092",
+        "MONGO_CONNECTION_STRING":"mongodb://localhost:27017",
+        "MONGO_DATABASE_NAME":"StockDB"
+
       },
-      "applicationUrl": "http://localhost:5000;https://localhost:5001"
+      "applicationUrl": "http://localhost:5005"
     },
     "Docker": {
       "commandName": "Docker",

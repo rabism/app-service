@@ -12,7 +12,10 @@ namespace StocksAPI.Features.StockFeatures.Queries
     public class GetStockByCompanyCodeQuery : IRequest<IReadOnlyList<Stock>>
     {
         public string CompanyCode { get; set; }
-        public class GetStockByCompanyCodeQueryHandler : IRequestHandler<GetStockByCompanyCodeQuery, IReadOnlyList<Stock>>
+        
+    }
+
+    public class GetStockByCompanyCodeQueryHandler : IRequestHandler<GetStockByCompanyCodeQuery, IReadOnlyList<Stock>>
         {
             private readonly IStockDbContext _context;
             public GetStockByCompanyCodeQueryHandler(IStockDbContext context)
@@ -24,5 +27,4 @@ namespace StocksAPI.Features.StockFeatures.Queries
                 return await _context.Stocks.FindAsync(x => x.CompanyCode.Equals(query.CompanyCode)).Result.ToListAsync();
             }
         }
-    }
 }

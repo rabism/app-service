@@ -12,18 +12,27 @@ namespace StocksAPI.Models
         private readonly IMongoDatabase _database = null;
         public StockDbContext()
         {
-            var client = new MongoClient("mongodb://localhost:27017");
+            string connectionString = Environment.GetEnvironmentVariable("MONGO_CONNECTION_STRING");
+            string database = Environment.GetEnvironmentVariable("MONGO_DATABASE_NAME");
+            if (connectionString == null || database == null)
+            {
+                connectionString = "mongodb://localhost:27017";
+                database = "StockDB";
+            }
+            
+            var client = new MongoClient(connectionString);
             if (client != null)
-                _database = client.GetDatabase("stock_testdb");
+                _database = client.GetDatabase(database);
         }
+       /*
         public StockDbContext(IOptions<Settings> settings)
         {
             var client = new MongoClient(settings.Value.ConnectionString);
             if (client != null)
                 _database = client.GetDatabase(settings.Value.Database);
         }
-
-        public IMongoCollection<Stock> Stocks
+        */
+       public IMongoCollection<Stock> Stocks
         {
             get
             {

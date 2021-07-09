@@ -1,18 +1,15 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
-using StocksAPI.EventSourcing;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace StocksAPI.Models
 {
     public class Stock 
     {
         [BsonId]
-        public int StockId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string StockId { get; set; }
 
         public decimal StockPrice { get; set; }
 

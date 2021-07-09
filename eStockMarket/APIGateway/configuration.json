@@ -12,7 +12,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/market/company/info/{companycode}",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "basic",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/company",
@@ -26,7 +30,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/market/company/getall",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "basic",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/company",
@@ -65,17 +73,17 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/add/{companycode}",
+      "DownstreamPathTemplate": "/api/stock/{companycode}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           //"Host": "stock-service",
           //"Port": 80
           "Host": "localhost",
-          "Port": 50478
+          "Port": 5005
         }
       ],
-      "UpstreamPathTemplate": "/add/{companycode}",
+      "UpstreamPathTemplate": "/api/v1.0/market/stock/add/{companycode}",
       "UpstreamHttpMethod": [ "Post" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "basic",
@@ -83,18 +91,22 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/get/{companycode}/{startdate}/{enddate}",
+      "DownstreamPathTemplate": "/api/stock/{companycode}/{startdate}/{enddate}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           //"Host": "stock-service",
           //"Port": 80
           "Host": "localhost",
-          "Port": 50478
+          "Port": 5005
         }
       ],
-      "UpstreamPathTemplate": "/get/{companycode}/{startdate}/{enddate}",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamPathTemplate": "/api/v1.0/market/stock/get/{companycode}/{startdate}/{enddate}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "basic",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/v1/users/register",

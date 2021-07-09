@@ -12,6 +12,5 @@ namespace StocksAPI.DTO
  ErrorMessage = "Stock price must be a fractional value.")]
         public decimal StockPrice { get; set; }
 
-        public DateTime StockDateTime { get; }
     }
 }
