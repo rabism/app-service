@@ -41,7 +41,11 @@ services:
     image: grafana/grafana
     #command:
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=P@ssw0rd
+      - name: GF_SECURITY_ADMIN_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: grafana-secret
+            key: gfsecurityadminpwd
     restart: always
     ports:
       - 3000:3000
