@@ -28,11 +28,11 @@ namespace Users.API.Services
                 throw new UserNotFoundException("This user id does not exists");
         }
 
-        public bool Login(UserDetails user)
+        public UserDetails Login(UserDetails user)
         {
             var _user = repository.GetUserByCredential(user);
             if (_user != null)
-                return true;
+                return _user;
             else
                 throw new UserNotFoundException("Invalid credentials");
         }

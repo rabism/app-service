@@ -87,7 +87,15 @@ JwtBearerDefaults.AuthenticationScheme)]
                     EndDate = enddate
                 });
                 //var stocks = await _stockService.GetAsync(companycode, startdate, enddate);
-                return Ok(stocks);
+                var result=stocks.Select(x=>new Stock{
+                    StockId=x.StockId,
+                    StockPrice=x.StockPrice,
+                    CompanyCode=x.CompanyCode,
+                    StockDateTime=x.StockDateTime,
+                    time=x.StockDateTime.ToString("HH:mm")
+
+                }).ToList();
+                return Ok(result);
             }
             catch (StockNotFoundException pnf)
             {

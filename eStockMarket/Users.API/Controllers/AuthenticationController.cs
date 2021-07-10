@@ -34,8 +34,8 @@ namespace Users.API.Controllers
             try
             {
                 _logger.LogInformation($"Verifying user details and generate token");
-                service.Login(user);
-                return Ok(GetJWTToken(user.Email));
+                var _user=  service.Login(user);
+                return Ok(GetJWTToken(user.Email,_user.UserName));
             }
             catch (UserNotFoundException unf)
             {
@@ -92,7 +92,7 @@ namespace Users.API.Controllers
                 return StatusCode(500);
             }
         }
-        private string GetJWTToken(string userId)
+        private string GetJWTToken(string userId,string userName)
         {
             //setting the claims for the user credential name
             var claims = new[]
@@ -114,7 +114,8 @@ namespace Users.API.Controllers
             //defing the response of the token 
             var response = new
             {
-                token = new JwtSecurityTokenHandler().WriteToken(token)
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                userName=userName
             };
             //convert into the json by serialing the response object
             return JsonConvert.SerializeObject(response);
